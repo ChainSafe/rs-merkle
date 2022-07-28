@@ -16,6 +16,7 @@ exclude = ["/ci/*", "/scripts/*", "/.github/*", "/bors.toml"]
 [dependencies]
 sha2 = { version = "0.10.2", default-features = false }
 micromath = "2.0.0"
+parity-scale-codec = { version = "^3", default-features = false, features = [ "derive" ] }
 
 # standard crate data is left out
 [dev-dependencies]
@@ -23,4 +24,7 @@ rayon = "1.5.1"
 
 [features]
 default = ['std']
-std = ["sha2/std"]
+std = [
+  "sha2/std",
+  "parity-scale-codec/std"
+]

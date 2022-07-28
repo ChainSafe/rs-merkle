@@ -1,5 +1,6 @@
 use crate::prelude::*;
 use crate::{error::Error, utils, Hasher};
+use parity_scale_codec::{Decode, Encode};
 
 type PartialTreeLayer<H> = Vec<(usize, H)>;
 
@@ -12,7 +13,7 @@ type PartialTreeLayer<H> = Vec<(usize, H)>;
 ///
 /// [`MerkleTree`]: crate::MerkleTree
 /// [`MerkleProof`]: crate::MerkleProof
-#[derive(Clone)]
+#[derive(Clone, Encode, Decode)]
 pub struct PartialTree<T: Hasher> {
     layers: Vec<Vec<(usize, T::Hash)>>,
 }

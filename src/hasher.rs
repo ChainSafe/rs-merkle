@@ -1,6 +1,7 @@
 use crate::prelude::*;
 use core::convert::TryFrom;
 use core::mem;
+use parity_scale_codec::{Decode, Encode};
 
 /// Hasher is a trait used to provide a hashing algorithm for the library.
 ///
@@ -39,7 +40,7 @@ pub trait Hasher: Clone {
     /// `PartialEq` is required to compare equality when verifying proof
     /// `Into<Vec<u8>>` is required to be able to serialize proof
     /// `TryFrom<Vec<u8>>` is required to parse hashes from a serialized proof
-    type Hash: Copy + PartialEq + Into<Vec<u8>> + TryFrom<Vec<u8>>;
+    type Hash: Copy + PartialEq + Into<Vec<u8>> + TryFrom<Vec<u8>> + Encode + Decode;
 
     /// This associated function takes a slice of bytes and returns a hash of it.
     /// Used by `concat_and_hash` function to build a tree from concatenated hashes

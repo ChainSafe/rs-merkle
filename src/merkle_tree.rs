@@ -1,5 +1,6 @@
 use crate::prelude::*;
 use crate::{partial_tree::PartialTree, utils, utils::indices, Hasher, MerkleProof};
+use parity_scale_codec::{Decode, Encode};
 
 /// [`MerkleTree`] is a Merkle Tree that is well suited for both basic and advanced usage.
 ///
@@ -9,7 +10,7 @@ use crate::{partial_tree::PartialTree, utils, utils::indices, Hasher, MerkleProo
 /// Advanced features include being able to make transactional changes to a tree with being able to
 /// roll back to any previously committed state of the tree. This scenario is similar to Git and
 /// can be found in databases and file systems.
-#[derive(Clone)]
+#[derive(Clone, Encode, Decode)]
 pub struct MerkleTree<T: Hasher> {
     current_working_tree: PartialTree<T>,
     history: Vec<PartialTree<T>>,
